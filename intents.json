@@ -85,8 +85,18 @@
             "patterns":[
                 "make a list",
                 "list",
-                "list tag",
+                "list tag"
+            ]
+            },
+            {
+                "tags":"footer",
+                "patterns":[
+                    "make a footer",
+                    "footer",
+                    "footer tag"
+                    
             ]
             }
+
     ]
 }
