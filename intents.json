@@ -12,8 +12,81 @@
         {
             "tags": "header",
             "patterns": [
-                "make a header"
+                "make a header",
+                "h1",
+                "heading"
+
             ]
-        }
+        },
+        {
+            "tags":"sub header",
+            "patterns":[
+                "make a sub header",
+                "h3"
+            ]
+        },
+        {
+            "tags":"anchor",
+            "patterns":[
+                "make anchor",
+                "put link",
+                "a",
+                "a tag"
+            ]
+        },
+        {
+            "tags":"image",
+            "patterns":[
+                "put image",
+                "image",
+                "img",
+                "image tag"
+            ]
+        },
+        {
+            "tags":"table",
+            "patterns":[
+                "make table",
+                "table",
+                "row",
+                "column",
+                "table tag"
+            ]
+        },
+        {
+            "tags":"table row",
+            "patterns":[
+                "insert row",
+                "tr",
+                "tr tag"
+            ]
+        },
+        {
+            "tags":"table data",
+            "patterns":[
+                "put data",
+                "td",
+                "td tag"
+            ]
+        },
+        {
+            "tags":"division",
+            "patterns":[
+                "make division",
+                "create a div",
+                "div",
+                "division",
+                "division tag",
+                "div tag"
+            ]
+        },
+        {
+            "tags":"list",
+            "patterns":[
+                "make a list",
+                "list",
+                "list tag",
+            ]
+            }
     ]
 }
