@@ -15,28 +15,28 @@
                 "make a header",
                 "h1",
                 "heading"
-
             ]
         },
         {
-            "tags":"sub header",
-            "patterns":[
+            "tags": "sub_header",
+            "patterns": [
                 "make a sub header",
                 "h3"
             ]
         },
         {
-            "tags":"anchor",
-            "patterns":[
+            "tags": "anchor",
+            "patterns": [
                 "make anchor",
                 "put link",
                 "a",
-                "a tag"
+                "a tag",
+                "anchor tag"
             ]
         },
         {
-            "tags":"image",
-            "patterns":[
+            "tags": "image",
+            "patterns": [
                 "put image",
                 "image",
                 "img",
@@ -44,8 +44,8 @@
             ]
         },
         {
-            "tags":"table",
-            "patterns":[
+            "tags": "table",
+            "patterns": [
                 "make table",
                 "table",
                 "row",
@@ -54,24 +54,24 @@
             ]
         },
         {
-            "tags":"table row",
-            "patterns":[
+            "tags": "table_row",
+            "patterns": [
                 "insert row",
                 "tr",
                 "tr tag"
             ]
         },
         {
-            "tags":"table data",
-            "patterns":[
+            "tags": "table_data",
+            "patterns": [
                 "put data",
                 "td",
                 "td tag"
             ]
         },
         {
-            "tags":"division",
-            "patterns":[
+            "tags": "division",
+            "patterns": [
                 "make division",
                 "create a div",
                 "div",
@@ -81,22 +81,20 @@
             ]
         },
         {
-            "tags":"list",
-            "patterns":[
+            "tags": "list",
+            "patterns": [
                 "make a list",
                 "list",
                 "list tag"
             ]
-            },
-            {
-                "tags":"footer",
-                "patterns":[
-                    "make a footer",
-                    "footer",
-                    "footer tag"
-                    
+        },
+        {
+            "tags": "footer",
+            "patterns": [
+                "make a footer",
+                "footer",
+                "footer tag"
             ]
-            }
-
+        }
     ]
 }
