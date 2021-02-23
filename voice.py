@@ -9,10 +9,22 @@ def listener():
     with sr.Microphone() as source:
         print('speak now')
         audio1 = r1.listen(source)
-        return r1.recognize_google(audio1)
+        spoken = ''
+        try:
+            spoken = r1.recognize_google(audio1)
+        except sr.UnknownValueError:
+            spoken = 'error!: unknown value'
+        except sr.RequestError:
+            spoken = 'error!: request error'
+        except:
+            spoken = 'error!'
+        finally:
+            return spoken
 
 
 '''
+sentence = listener()
+print(sentence)
 import speech_recognition as sr
 import pyaudio as pa
 import webbrowser as wb

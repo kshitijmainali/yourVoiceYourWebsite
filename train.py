@@ -106,9 +106,24 @@ for epoch in range(numEpoch):
 # print the final loss
 print(f'final ::loss = {loss.item():.4f} ')
 
+# save the model
+data = {
+    "modelState": model.state_dict(),
+    "input_size": inputSize,
+    "output_size": outputSize,
+    "hidden_size": hiddenSize,
+    "allWords_size": allWords,
+    "tags": tags,
+}
+
+FILE = "data.pth"
+torch.save(data, FILE)
+print(f'training complete. file saved to {FILE}')
+
 
 '''
 # listen to the voice and convert to text
+
 spokenText = voice.listener()
 print(spokenText)
 # tokenization

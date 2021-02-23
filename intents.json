@@ -58,7 +58,8 @@
             "patterns": [
                 "insert row",
                 "tr",
-                "tr tag"
+                "tr tag",
+                "insert table row"
             ]
         },
         {
