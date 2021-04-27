@@ -64,9 +64,22 @@ def giveResponse(sentence, botName):
         for intent in intents['intents']:
             if tag == intent["tags"]:
                 # {random.choice(intent['tags'])}
-                print(f"{botName}: {tag} \n => {prob.item()} ")
+                print(f"{botName}: {tag}")
+                return tag
     else:
         print(f"{botName}: I do not understand...")
+
+# create a html file according to the commands
+
+
+def createHtml():
+    pass
+
+
+# dictionary to hold the command given
+commandTags = {
+    "tags": []
+}
 
 
 def main():
@@ -87,12 +100,18 @@ def main():
             if sentence == 'quit':
                 break
             # if command is understandable give response
-            giveResponse(sentence, botName)
+            tag = giveResponse(sentence, botName)
+            data = {
+                "element": tag,
+                "innerHtml": "this "
+            }
+            # save the command to dictionary
+            commandTags["tags"].append(data)
 
-            # create a json file
-            file = open("websitedata.txt", "a+")
-            file.write('this is the line')
-            file.close()
+    print("commandTags:", commandTags)
+    # now create a html file according to the command tag
+    # createHtml(commandTags)
+    # render the page
 
 
 if __name__ == "__main__":
