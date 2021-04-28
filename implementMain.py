@@ -37,14 +37,16 @@ def loadModel():
     model = NeuralNet(inputSize, hiddenSize, outputSize)
     return model, modelState, allWords, tags
 
+# just giving response according to user command
+
 
 def giveResponse(sentence, botName):
     # load the saved model
     model, modelState, allWords, tags = loadModel()
-    # load the state dic
+    # load the statedictionary
     model.load_state_dict(modelState)
     model.eval()
-    # load intents
+    # load intentsfile
     intents = loadIntent()
 
     # tokenize find BOG predict the class for new sentence
@@ -87,6 +89,7 @@ def main():
     botName = "Jony"
     print("Let's chat! type quit to exit ")
 
+    # listen to user, predict the command, and gve appropriate response
     while True:
         # listen to voice command
         sentence = listener()
