@@ -7,11 +7,6 @@
                 "make p1",
                 "p1",
                 "pargraph"
-            ],
-            "attributes": [
-                "id",
-                "class",
-                "innerText"
             ]
         },
         {
@@ -20,11 +15,6 @@
                 "make a header",
                 "h1",
                 "heading"
-            ],
-            "attributes": [
-                "class",
-                "id",
-                "innerText"
             ]
         },
         {

@@ -97,7 +97,7 @@ for epoch in range(numEpoch):
         loss = criterion(outputs, label)
 
         # backward pass
-        optimizer.zero_grad()
+        optimizer.zero_grad() 
         loss.backward()
         optimizer.step()
     if(epoch+1) % 100 == 0:

@@ -106,7 +106,7 @@ def main():
             tag = giveResponse(sentence, botName)
             data = {
                 "element": tag,
-                "innerHtml": "this "
+                "innerHtml": "this"
             }
             # save the command to dictionary
             commandTags["tags"].append(data)

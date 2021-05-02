@@ -1,0 +1,38 @@
+{
+    "attributes": [
+        {
+            "attr": "id",
+            "pattern": [
+                "id",
+                "id of the paragraph is ",
+                "id of tag",
+                "tag id",
+                "give id as "
+            ]
+        },
+        {
+            "attr": "class",
+            "pattern": [
+                "class",
+                "give class name as ",
+                "class name of the tag",
+                "tag class",
+                "class of paragraph/header/Img/footer,"
+            ]
+        },
+        {
+            "attr": "href",
+            "pattern": [
+                "href",
+                "href of anchor tag"
+            ]
+        },
+        {
+            "attr": "src",
+            "pattern": [
+                "src",
+                "source of image is "
+            ]
+        }
+    ]
+}
