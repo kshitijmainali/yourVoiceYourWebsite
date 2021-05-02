@@ -21,6 +21,14 @@
             ]
         },
         {
+            "attr": "style",
+            "patterns": [
+                "style",
+                "create style "
+                
+            ]
+        },
+        {
             "attr": "href",
             "patterns": [
                 "href",
