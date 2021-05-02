@@ -2,7 +2,7 @@
     "attributes": [
         {
             "attr": "id",
-            "pattern": [
+            "patterns": [
                 "id",
                 "id of the paragraph is ",
                 "id of tag",
@@ -12,7 +12,7 @@
         },
         {
             "attr": "class",
-            "pattern": [
+            "patterns": [
                 "class",
                 "give class name as ",
                 "class name of the tag",
@@ -22,14 +22,14 @@
         },
         {
             "attr": "href",
-            "pattern": [
+            "patterns": [
                 "href",
                 "href of anchor tag"
             ]
         },
         {
             "attr": "src",
-            "pattern": [
+            "patterns": [
                 "src",
                 "source of image is "
             ]
