@@ -6,8 +6,8 @@ from tokenizationAndStemming import BagOfWords, tokenize
 from voice import listener
 
 
+# Tokenize, stem the spoken word and shape them to fit on the model
 def tokenizeAndStemSpoken(sentence, allWords):
-    # predict the class for new sentence
     sentence = tokenize(sentence)
     x = BagOfWords(sentence, allWords)
     x = x.reshape(1, x.shape[0])
@@ -15,11 +15,13 @@ def tokenizeAndStemSpoken(sentence, allWords):
     return x
 
 
+# open the intents file
 def loadIntent():
-    # open the intents file
     with open("intents.json", "r") as f:
         intents = json.load(f)
     return intents
+
+# Load the creadential saved during training
 
 
 def loadModel():
@@ -37,15 +39,17 @@ def loadModel():
     model = NeuralNet(inputSize, hiddenSize, outputSize)
     return model, modelState, allWords, tags
 
-# just giving response according to user command
+# Listen to the next Html tag
 
 
-def giveResponse(sentence, botName):
+def listenTag(sentence, botName):
     # load the saved model
     model, modelState, allWords, tags = loadModel()
+
     # load the statedictionary
     model.load_state_dict(modelState)
     model.eval()
+
     # load intentsfile
     intents = loadIntent()
 
@@ -71,9 +75,14 @@ def giveResponse(sentence, botName):
     else:
         print(f"{botName}: I do not understand...")
 
+# Listen to the attributes assigned to each tag
+
+
+def listenAttribute():
+    pass
+
+
 # create a html file according to the commands
-
-
 def createHtml():
     pass
 
@@ -102,8 +111,13 @@ def main():
             print(f'you: {sentence}')  # sentence =input('you:')
             if sentence == 'quit':
                 break
-            # if command is understandable give response
-            tag = giveResponse(sentence, botName)
+            # if command is understandable synthesize the tag
+            tag = listenTag(sentence, botName)
+
+            # For each tag there are attributes listen to the attributes
+            attribute = listenAttribute()
+
+            # After tag and attributes are clear make appropriate data to pass to react
             data = {
                 "element": tag,
                 "innerHtml": "this"
