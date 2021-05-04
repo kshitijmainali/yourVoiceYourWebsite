@@ -44,6 +44,14 @@
             ]
         },
         {
+            "tags": "video",
+            "patterns": [
+                "put video",
+                "video",
+                "video tag"
+            ]
+        },
+        {
             "tags": "table",
             "patterns": [
                 "make table",
@@ -181,6 +189,15 @@
                 "make a strong word",
                 "strong tag"
             ]
+        },  
+        {
+            "tags": "i",
+            "patterns": [
+                "italic text ",
+                "make a italic sentence",
+                "make a italic word",
+                "italic tag"
+            ]
         },
 
         {
@@ -190,6 +207,15 @@
                 "create a dialog box",
                 "dialog",
                 "dialog tag"
+            ]
+        },
+        {
+            "tags": "textarea",
+            "patterns": [
+                "make a textarea",
+                "create a textarea box",
+                "textarea",
+                "textarea tag"
             ]
         },
         {
