@@ -34,12 +34,32 @@
                 "href",
                 "href of anchor tag"
             ]
+        },{
+            "attr": "action",
+            "patterns": [
+                "action",
+                "insert action"
+            ]
         },
         {
             "attr": "src",
             "patterns": [
                 "src",
                 "source of image is "
+            ]
+        }, 
+        {
+            "attr": "placecholder",
+            "patterns": [
+                "placecholder",
+                "placecholder of field"
+            ]
+        },
+        {
+            "attr": "type",
+            "patterns": [
+                "type",
+                "input type is "
             ]
         }
     ]
