@@ -21,10 +21,24 @@
             ]
         },
         {
+            "attr": "style",
+            "patterns": [
+                "style",
+                "create style "
+                
+            ]
+        },
+        {
             "attr": "href",
             "patterns": [
                 "href",
                 "href of anchor tag"
+            ]
+        },{
+            "attr": "action",
+            "patterns": [
+                "action",
+                "insert action"
             ]
         },
         {
@@ -32,6 +46,20 @@
             "patterns": [
                 "src",
                 "source of image is "
+            ]
+        }, 
+        {
+            "attr": "placecholder",
+            "patterns": [
+                "placecholder",
+                "placecholder of field"
+            ]
+        },
+        {
+            "attr": "type",
+            "patterns": [
+                "type",
+                "input type is "
             ]
         }
     ]
