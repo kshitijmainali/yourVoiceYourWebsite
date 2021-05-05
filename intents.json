@@ -171,7 +171,7 @@
                 "label",
                 "label tag"
             ]
-        }, 
+        },
         {
             "tags": "b",
             "patterns": [
@@ -189,7 +189,7 @@
                 "make a strong word",
                 "strong tag"
             ]
-        },  
+        },
         {
             "tags": "i",
             "patterns": [
@@ -199,7 +199,6 @@
                 "italic tag"
             ]
         },
-
         {
             "tags": "dialog",
             "patterns": [
@@ -214,6 +213,7 @@
             "patterns": [
                 "make a textarea",
                 "create a textarea box",
+                "text area",
                 "textarea",
                 "textarea tag"
             ]
@@ -236,7 +236,8 @@
                 "form",
                 "form tag"
             ]
-        },{
+        },
+        {
             "tags": "input",
             "patterns": [
                 "input a field",
@@ -253,7 +254,8 @@
                 "break",
                 "break tag"
             ]
-        },{
+        },
+        {
             "tags": "hr",
             "patterns": [
                 "make a horizontal line",
