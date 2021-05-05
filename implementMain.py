@@ -41,7 +41,7 @@ def loadModel():
     model = NeuralNet(inputSize, hiddenSize, outputSize)
     return model, modelState, allWords, tags
 
-# Listen to the next Html tag
+# synthesize next Html tag or attribute provided
 
 
 def listenTag(sentence, botName, recType):
@@ -81,24 +81,14 @@ def listenTag(sentence, botName, recType):
     else:
         print(f"{botName}: I do not understand...")
 
-# Listen to the attributes assigned to each tag
-
-
-def listenAttribute():
-    pass
-
-
 # create a html file according to the commands
+
+
 def createHtml():
     pass
 
 
-# dictionary to hold the command given
-commandTags = {
-    "tags": []
-}
-
-
+# listen to user for tag or atrribute
 def listenUser(recType):
     # dont be confuse this while is for the case when tag is not recognized
     while True:
@@ -116,20 +106,33 @@ def listenUser(recType):
         # check if listener return an error
         if 'error!' in sentence:
             print(f"{botName}: I do not understand...")
-
         elif 'quit' in sentence:
             return 'quit'
-
         else:
-            print(f'you: {sentence}')  # sentence =input('you:')
+            print(f'you: {sentence}')
             # if command is understandable synthesize the tag
             tag = listenTag(sentence, botName, recType)
             print(f'jony: {tag}')
 
             return tag
 
-            # if sentence == 'quit':print
-            #     break
+# As some one give an atribute there should be a value associated
+
+
+def listenValue(attribute):
+    while True:
+        print(f'jony: speak {attribute} value')
+        value = listener()
+        if 'error!' in value:
+            print(f"jony: I don't understand")
+        else:
+            return value
+
+
+# dictionary to hold the command given
+commandTags = {
+    "tags": []
+}
 
 
 def main():
@@ -139,16 +142,23 @@ def main():
         tag = []
         attribute = []
 
+        # listen the tag
         tag = listenUser(1)
         if tag == 'quit':
             break
-        # For each tag there are attributes listen to the attributes
-        attribute = listenUser(2)
-        if attribute == 'quit':
-            break
-
-        print(tag, attribute)
-        # After tag and attributes are clear make appropriate data to pass to react
+        # For each tag there can be multiple attributes listen to the attributes
+        while True:
+            listenedAttribute = listenUser(2)
+            if listenedAttribute == 'quit':
+                break
+            if listenedAttribute is not None:
+                value = listenValue(listenedAttribute)
+                attrValue = {
+                    "attr": listenedAttribute,
+                    "value": value
+                }
+                attribute.append(attrValue)
+       # After tag and attributes are clear make appropriate data to pass to react
         data = {
             "element": tag,
             "attributes": attribute
