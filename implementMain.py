@@ -68,7 +68,7 @@ def listenTag(sentence, botName, recType):
     prob = probs[0][predicted.item()]
 
     # loop for pattern to see if any pattern matches
-    if prob.item() > 85:
+    if prob.item() > 0.85:
         # now we have to decide are we looking for tag or attribute
         if recType == 1:
             for intent in intents['intents']:
