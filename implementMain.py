@@ -68,7 +68,7 @@ def listenTag(sentence, botName, recType):
     prob = probs[0][predicted.item()]
 
     # loop for pattern to see if any pattern matches
-    if prob.item() > 0.75:
+    if prob.item() > 85:
         # now we have to decide are we looking for tag or attribute
         if recType == 1:
             for intent in intents['intents']:
@@ -154,8 +154,7 @@ def main():
             if listenedAttribute is not None:
                 value = listenValue(listenedAttribute)
                 attrValue = {
-                    "attr": listenedAttribute,
-                    "value": value
+                    listenedAttribute: value
                 }
                 attribute.append(attrValue)
        # After tag and attributes are clear make appropriate data to pass to react

@@ -49,10 +49,10 @@
             ]
         },
         {
-            "attr": "placecholder",
+            "attr": "placeholder",
             "patterns": [
-                "placecholder",
-                "placecholder of field"
+                "placeholder",
+                "placeholder of field"
             ]
         },
         {
