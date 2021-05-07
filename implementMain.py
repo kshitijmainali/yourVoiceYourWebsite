@@ -5,6 +5,8 @@ from model import NeuralNet
 from tokenizationAndStemming import BagOfWords, tokenize
 from voice import listener
 
+from specialHandlers import listenValue, handleSrc, handleTable, handleList
+
 
 # Tokenize, stem the spoken word and shape them to fit on the model
 def tokenizeAndStemSpoken(sentence, allWords):
@@ -44,7 +46,7 @@ def loadModel():
 # synthesize next Html tag or attribute provided
 
 
-def listenTag(sentence, botName, recType):
+def synthesizeTag(sentence, botName, recType):
     # load the saved model
     model, modelState, allWords, tags = loadModel()
 
@@ -103,30 +105,47 @@ def listenUser(recType):
         sentence = listener()
         print('I hear', sentence)
 
-        # check if listener return an error
-        if 'error!' in sentence:
-            print(f"{botName}: I do not understand...")
-        elif 'quit' in sentence:
+        # see if the user say quit to end the tag
+        if 'quit' in sentence:
             return 'quit'
         else:
             print(f'you: {sentence}')
             # if command is understandable synthesize the tag
-            tag = listenTag(sentence, botName, recType)
+            tag = synthesizeTag(sentence, botName, recType)
             print(f'jony: {tag}')
 
             return tag
 
-# As some one give an atribute there should be a value associated
+
+def listenTag():
+     # listen the tag
+    tag = listenUser(1)
+    # we have to handle some special tag like tabe,list,inputoption etc
+    if tag == 'table':
+        innerElement = handleTable()
+    if tag == 'ol' or tag == 'ul':
+        innerElement = handleList()
+    return tag, innerElement
 
 
-def listenValue(attribute):
+def listenAttribute():
+    attribute = []
+    # For each tag there can be multiple attributes listen to the attributes
     while True:
-        print(f'jony: speak {attribute} value')
-        value = listener()
-        if 'error!' in value:
-            print(f"jony: I don't understand")
-        else:
-            return value
+        listenedAttribute = listenUser(2)
+        if listenedAttribute == 'finish':
+            return attribute
+        if listenedAttribute is not None:
+            # we have to handle some special attribute like src,values of option
+            if listenedAttribute == "src":
+                value = handleSrc()
+            else:
+                value = listenValue(listenedAttribute)
+            attrValue = {
+                "attr": listenedAttribute,
+                "value": value
+            }
+            attribute.append(attrValue)
 
 
 # dictionary to hold the command given
@@ -141,25 +160,28 @@ def main():
         # empty lists to contain the atriibute and
         tag = []
         attribute = []
+        innerElement = []
+        innerText = []
 
-        # listen the tag
-        tag = listenUser(1)
+        # listen to various tag and their inner nested tags
+        tag, innerElement = listenTag()
         if tag == 'quit':
             break
-        # For each tag there can be multiple attributes listen to the attributes
-        while True:
-            listenedAttribute = listenUser(2)
-            if listenedAttribute == 'quit':
-                break
-            if listenedAttribute is not None:
-                value = listenValue(listenedAttribute)
-                attrValue = {
-                    listenedAttribute: value
-                }
-                attribute.append(attrValue)
+
+        # listen to associated attribute
+        attribute = listenAttribute()
+
+        # now we have to listen to the innertext if there is any
+        print(f'is there any inner text associated with {tag} ?')
+        openion = listener()
+        if 'yes' in openion:
+            innerText = listener()
+
        # After tag and attributes are clear make appropriate data to pass to react
         data = {
             "element": tag,
+            "innerText": innerText,
+            "innerElement": innerElement,
             "attributes": attribute
         }
         # save the command to dictionary

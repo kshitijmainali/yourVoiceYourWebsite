@@ -6,20 +6,25 @@ r1 = sr.Recognizer()
 
 
 def listener():
-    with sr.Microphone() as source:
-        print('speak now')
-        audio1 = r1.listen(source)
-        spoken = ''
-        try:
-            spoken = r1.recognize_google(audio1)
-        except sr.UnknownValueError:
-            spoken = 'error!: unknown value'
-        except sr.RequestError:
-            spoken = 'error!: request error'
-        except:
-            spoken = 'error!'
-        finally:
-            return spoken
+    # while here to listen untill correct word is spoken
+    while True:
+        with sr.Microphone() as source:
+            print('speak now')
+            audio1 = r1.listen(source)
+            spoken = ''
+            try:
+                spoken = r1.recognize_google(audio1)
+            except sr.UnknownValueError:
+                spoken = 'error!: unknown value'
+                print("Jony: I don't understand")
+            except sr.RequestError:
+                spoken = 'error!: request error'
+                print("Jony: I don't understand")
+            except:
+                spoken = 'error!'
+                print(f"Jony: I don't understand")
+            else:
+                return(spoken)
 
 
 '''

@@ -45,7 +45,10 @@
             "attr": "src",
             "patterns": [
                 "src",
-                "source of image is "
+                "source of image is ",
+                "source attribute",
+                "source of vedio is",
+                "source of current tag"
             ]
         },
         {
