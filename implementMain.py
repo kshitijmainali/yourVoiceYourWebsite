@@ -125,10 +125,12 @@ def listenTag():
         innerElement = handleTable()
     if tag == 'ol' or tag == 'ul':
         innerElement = handleList()
+    if tag == 'input':
+
     return tag, innerElement
 
 
-def listenAttribute():
+def listenAttribute(tag):
     attribute = []
     # For each tag there can be multiple attributes listen to the attributes
     while True:
@@ -169,7 +171,7 @@ def main():
             break
 
         # listen to associated attribute
-        attribute = listenAttribute()
+        attribute = listenAttribute(tag)
 
         # now we have to listen to the innertext if there is any
         print(f'is there any inner text associated with {tag} ?')

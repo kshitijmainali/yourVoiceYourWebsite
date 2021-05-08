@@ -242,7 +242,6 @@
             "patterns": [
                 "input a field",
                 "input ",
-                "input",
                 "input tag"
             ]
         },
