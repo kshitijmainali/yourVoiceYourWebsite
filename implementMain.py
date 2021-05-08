@@ -108,6 +108,8 @@ def listenUser(recType):
         # see if the user say quit to end the tag
         if 'quit' in sentence:
             return 'quit'
+        elif 'finish' in sentence:
+            return 'quit'
         else:
             print(f'you: {sentence}')
             # if command is understandable synthesize the tag
@@ -119,6 +121,7 @@ def listenUser(recType):
 
 def listenTag():
      # listen the tag
+    innerElement = []
     tag = listenUser(1)
     # we have to handle some special tag like tabe,list,inputoption etc
     if tag == 'table':
@@ -133,7 +136,7 @@ def listenAttribute():
     # For each tag there can be multiple attributes listen to the attributes
     while True:
         listenedAttribute = listenUser(2)
-        if listenedAttribute == 'finish':
+        if 'quit' in listenedAttribute:
             return attribute
         if listenedAttribute is not None:
             # we have to handle some special attribute like src,values of option
