@@ -45,7 +45,7 @@ def listenTableData(row):
         values.append(data)
         print(f"more table data? speak 'Yes' to continue")
         openion = listener()
-        if openion.lower() != "yes":
+        if "yes" in openion.lower():
             return values
 
 # this handle specially ordered or unordered list
@@ -63,7 +63,7 @@ def handleList():
     listCollection.append(list)
     print(f"want to add more? 'Yes' to continue")
     openion = listener()
-    if openion.lower() != 'yes':
+    if "yes" in openion.lower():
         return listCollection
 
 
