@@ -25,13 +25,7 @@
                 "sub header"
             ]
         },
-        {
-            "tags": "sub_header",
-            "patterns": [
-                "make a sub header",
-                "h3"
-            ]
-        },
+        
         {
             "tags": "a",
             "patterns": [
