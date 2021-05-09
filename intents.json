@@ -14,7 +14,15 @@
             "patterns": [
                 "make a header",
                 "h1",
-                "heading"
+                "heading",
+                "header"
+            ]
+        },{
+            "tags": "h3",
+            "patterns": [
+                "make a sub header",
+                "h3",
+                "sub header"
             ]
         },
         {
