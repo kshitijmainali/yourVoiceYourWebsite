@@ -16,20 +16,37 @@
 </head>
 
 <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-transparent" >
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <a class="navbar-brand" href="#"style="color: aliceblue"><h3>Your Voice Your Website</h3></a>
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active invisible" >
+          <a class="nav-link" href="#" style="color: aliceblue">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item invisible"  >
+          <a class="nav-link" href="#"style="color: aliceblue">About Us</a>
+        </li>
+        <li class="nav-item invisible">
+          <a class="nav-link disabled" href="#"style="color: aliceblue">Contact</a>
+        </li>
+        <li>
+        <button type="button" id="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+          Speak UP  
+          </button>
+          </li>
 
+        </ul>
+      </div>
+  </nav>
     <canvas id="canvas">
 
-       
     </canvas>
     <div class="wrapper">
 <!-- Button trigger modal -->
-<div class="container">
-    <button type="button" id="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-    Speak UP  
-
-  </button>
-  <i class="fas fa-microphone"></i>
-</div>
+    
 
   
   <!-- Modal -->

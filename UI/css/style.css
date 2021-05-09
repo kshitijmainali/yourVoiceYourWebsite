@@ -21,16 +21,19 @@ body {
 .wrapper{
     text-align: center;
 }
+.navbar{
+  background-color: transparent;
+  position: absolute;
+
+}
 
 .btn-success{
     position: absolute;
+    margin-left: 600px;
     background-color: transparent;
     font-weight: bold;
     text-transform: uppercase;
     font-size: 30px;
-    top:50%;
-    right: 45%;
-    padding: 20px;
     border-radius: 10px;
 }
 .font-italic{
