@@ -5,10 +5,11 @@ from model import NeuralNet
 from tokenizationAndStemming import BagOfWords, tokenize
 from voice import listener
 
-from specialHandlers import listenValue, handleSrc, handleTable, handleList
-
+from specialHandlers import handleSrc, handleTable, handleList, handleSelect
 
 # Tokenize, stem the spoken word and shape them to fit on the model
+
+
 def tokenizeAndStemSpoken(sentence, allWords):
     sentence = tokenize(sentence)
     x = BagOfWords(sentence, allWords)
@@ -18,44 +19,32 @@ def tokenizeAndStemSpoken(sentence, allWords):
 
 
 # open the intents file
-def loadIntent():
-    with open("intents.json", "r") as f:
-        intents = json.load(f)
-    with open("attributes.json", "r") as f:
-        attributes = json.load(f)
-    return intents, attributes
+with open("intents.json", "r") as f:
+    intents = json.load(f)
+with open("attributes.json", "r") as f:
+    attributes = json.load(f)
 
 # Load the creadential saved during training
 
+FILE = "data.pth"
+data = torch.load(FILE)
 
-def loadModel():
-    FILE = "data.pth"
-    data = torch.load(FILE)
+# load all the saved values
+inputSize = data["input_size"]
+outputSize = data["output_size"]
+hiddenSize = data["hidden_size"]
+allWords = data["allWords_size"]
+tags = data["tags"]
+modelState = data["modelState"]
 
-    # load all the saved values
-    inputSize = data["input_size"]
-    outputSize = data["output_size"]
-    hiddenSize = data["hidden_size"]
-    allWords = data["allWords_size"]
-    tags = data["tags"]
-    modelState = data["modelState"]
-
-    model = NeuralNet(inputSize, hiddenSize, outputSize)
-    return model, modelState, allWords, tags
-
+model = NeuralNet(inputSize, hiddenSize, outputSize)
 # synthesize next Html tag or attribute provided
 
 
 def synthesizeTag(sentence, botName, recType):
-    # load the saved model
-    model, modelState, allWords, tags = loadModel()
-
     # load the statedictionary
     model.load_state_dict(modelState)
     model.eval()
-
-    # load intentsfile
-    intents, attributes = loadIntent()
 
     # tokenize find BOG predict the class for new sentence
     x = tokenizeAndStemSpoken(sentence, allWords)
@@ -83,14 +72,9 @@ def synthesizeTag(sentence, botName, recType):
     else:
         print(f"{botName}: I do not understand...")
 
-# create a html file according to the commands
-
-
-def createHtml():
-    pass
-
-
 # listen to user for tag or atrribute
+
+
 def listenUser(recType):
     # dont be confuse this while is for the case when tag is not recognized
     while True:
@@ -103,31 +87,38 @@ def listenUser(recType):
 
         # listen to voice command
         sentence = listener()
-        print('I hear', sentence)
+        print('Jony: I hear>', sentence)
 
         # see if the user say quit to end the tag
         if 'quit' in sentence:
+            return 'quit'
+        elif 'finish' in sentence:
             return 'quit'
         else:
             print(f'you: {sentence}')
             # if command is understandable synthesize the tag
             tag = synthesizeTag(sentence, botName, recType)
             print(f'jony: {tag}')
-
             return tag
 
 
 def listenTag():
      # listen the tag
+    innerElement = []
     tag = listenUser(1)
     # we have to handle some special tag like tabe,list,inputoption etc
     if tag == 'table':
         innerElement = handleTable()
     if tag == 'ol' or tag == 'ul':
         innerElement = handleList()
-    if tag == 'input':
+    if tag == "form":
+        innerElement = handleForm()
+    if tag == 'select':
+        innerElement = handleSelect()
 
     return tag, innerElement
+
+# it listen to the attribute for special tag
 
 
 def listenAttribute(tag):
@@ -135,19 +126,65 @@ def listenAttribute(tag):
     # For each tag there can be multiple attributes listen to the attributes
     while True:
         listenedAttribute = listenUser(2)
-        if listenedAttribute == 'finish':
-            return attribute
         if listenedAttribute is not None:
+            if 'quit' in listenedAttribute:
+                return attribute
             # we have to handle some special attribute like src,values of option
             if listenedAttribute == "src":
                 value = handleSrc()
             else:
-                value = listenValue(listenedAttribute)
+                print(f'jony: speak {listenedAttribute} value')
+                value = listener()
             attrValue = {
                 "attr": listenedAttribute,
                 "value": value
             }
             attribute.append(attrValue)
+
+
+def completeListener():
+    # empty lists to contain the atriibute and
+    tag = []
+    attribute = []
+    innerElement = []
+    innerText = []
+
+    # listen to various tag and their inner nested tags
+    tag, innerElement = listenTag()
+
+    # some tag like img,vedio,input,href need atrribute like src,type,href
+    mustHaveAtrribute = ['img', 'input', 'vedio', 'a']
+
+    # listen to associated attribute
+    if tag in mustHaveAtrribute:
+        attribute = listenAttribute(tag)
+
+    # now we have to listen to the innertext if there is any
+    print(f'is there any inner text associated with {tag} ?')
+    openion = listener()
+    if 'yes' in openion:
+        innerText = listener()
+
+    # After tag and attributes are clear make appropriate data to pass to react
+    data = {
+        "element": tag,
+        "innerText": innerText,
+        "attributes": attribute,
+        "innerElement": innerElement
+    }
+    return data
+
+
+def handleForm():
+    while True:
+        tags = []
+        tag = completeListener()
+        tags.append(tag)
+        print('is there more tag inside form?')
+        print('till now ', tags)
+        openion = listener()
+        if 'yes' not in openion:
+            return tags
 
 
 # dictionary to hold the command given
@@ -158,36 +195,10 @@ commandTags = {
 
 def main():
     # listen to user, predict the command, and gve appropriate response
-    while True:
-        # empty lists to contain the atriibute and
-        tag = []
-        attribute = []
-        innerElement = []
-        innerText = []
+    data = completeListener()
 
-        # listen to various tag and their inner nested tags
-        tag, innerElement = listenTag()
-        if tag == 'quit':
-            break
-
-        # listen to associated attribute
-        attribute = listenAttribute(tag)
-
-        # now we have to listen to the innertext if there is any
-        print(f'is there any inner text associated with {tag} ?')
-        openion = listener()
-        if 'yes' in openion:
-            innerText = listener()
-
-       # After tag and attributes are clear make appropriate data to pass to react
-        data = {
-            "element": tag,
-            "innerText": innerText,
-            "innerElement": innerElement,
-            "attributes": attribute
-        }
-        # save the command to dictionary
-        commandTags["tags"].append(data)
+    # save the command to dictionary
+    commandTags["tags"].append(data)
 
     print("commandTags:", commandTags)
     # now create a html file according to the command tag

@@ -1,10 +1,12 @@
 from pathlib import Path
 from voice import listener
+#from implementMain import completeListener
 
 
 def handleSrc():
     while True:
-        spoken = listenValue('src')
+        print(f'jony: speak src value')
+        spoken = listener()
         # file are with different extension like .jpg,jpeg,mp4 we have to find appropriate file
         fileToOpen = completeFile(spoken)
         if fileToOpen:
@@ -22,9 +24,10 @@ def handleTable():
             "innerElement": rowInner
         }
         rowData.append(intermidiateRow)
+        print(rowData)
         print(f"want to add more rows? 'Yes' to continue")
         openion = listener()
-        if openion.lower() != 'yes':
+        if "yes" not in openion.lower():
             return rowData
         row = row+1
 
@@ -43,9 +46,9 @@ def listenTableData(row):
             "value": spoken
         }
         values.append(data)
-        print(f"more table data? speak 'Yes' to continue")
+        print(f"more {tag}? speak 'Yes' to continue")
         openion = listener()
-        if "yes" in openion.lower():
+        if "yes" not in openion.lower():
             return values
 
 # this handle specially ordered or unordered list
@@ -54,20 +57,45 @@ def listenTableData(row):
 def handleList():
     listNo = 1
     listCollection = []
-    print(f"{listNo} list value")
-    value = listener()
-    list = {
-        "tag": "li",
-        "value": value
-    }
-    listCollection.append(list)
-    print(f"want to add more? 'Yes' to continue")
-    openion = listener()
-    if "yes" in openion.lower():
-        return listCollection
+    while True:
+        print(f"{listNo} list value")
+        value = listener()
+        list = {
+            "tag": "li",
+            "value": value
+        }
+        listCollection.append(list)
+        print(f'updatedli: {listCollection} ')
+        print(f"want to add more? 'Yes' to continue")
+        openion = listener()
+        if "yes" not in openion.lower():
+            return listCollection
+        listNo = listNo+1
+
+# select tag handler
 
 
-# this function looks for appropriate match for spekon file
+def handleSelect():
+    optionNo = 1
+    options = []
+    while True:
+        print(f"speak option {optionNo}")
+        value = listener()
+        option = {
+            "tag": 'option',
+            "value": value
+        }
+        options.append(option)
+        print(options)
+        print(f"is their more option?")
+        openion = listener()
+        if 'yes' not in openion.lower():
+            return options
+        optionNo += 1
+
+ # this function looks for appropriate match for spekon file
+
+
 def completeFile(spoken):
     dataFolder = Path(
         'C:/Users/KSHITIJ/OneDrive/Desktop/finalProject/imgAndVedio')
@@ -83,10 +111,3 @@ def completeFile(spoken):
                 return possible
     print("File doesn't exist")
     return None
-
-
-# As some one give an atribute there should be a value associated
-def listenValue(attribute):
-    print(f'jony: speak {attribute} value')
-    value = listener()
-    return value
