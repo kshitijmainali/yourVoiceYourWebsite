@@ -2,3 +2,5 @@
 *.jpeg
 *.jpe
 *.png
+*.env
+node_modules
