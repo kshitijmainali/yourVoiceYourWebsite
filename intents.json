@@ -10,22 +10,24 @@
             ]
         },
         {
-            "tags": "header",
+            "tags": "h1",
             "patterns": [
                 "make a header",
                 "h1",
-                "heading"
+                "heading",
+                "header"
             ]
-        },
-        {
-            "tags": "sub_header",
+        },{
+            "tags": "h3",
             "patterns": [
                 "make a sub header",
-                "h3"
+                "h3",
+                "sub header"
             ]
         },
+        
         {
-            "tags": "anchor",
+            "tags": "a",
             "patterns": [
                 "make anchor",
                 "put link",
@@ -62,7 +64,7 @@
             ]
         },
         {
-            "tags": "table_row",
+            "tags": "tr",
             "patterns": [
                 "insert row",
                 "tr",
@@ -71,7 +73,7 @@
             ]
         },
         {
-            "tags": "table_data",
+            "tags": "td",
             "patterns": [
                 "put data",
                 "td",
@@ -79,7 +81,7 @@
             ]
         },
         {
-            "tags": "division",
+            "tags": "div",
             "patterns": [
                 "make division",
                 "create a div",
