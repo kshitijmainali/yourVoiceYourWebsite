@@ -11,7 +11,7 @@ class NewCommand extends Component {
                 <div class="wrapper">
                     {/* <!-- Button trigger modal --> */}
                     <div class="container">
-                        <button type="button" id="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" onClick={this.handleClick()} id="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
                             Speak UP
                         </button>
                         <i class="fas fa-microphone"></i>
