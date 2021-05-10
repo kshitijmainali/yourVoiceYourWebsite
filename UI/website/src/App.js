@@ -1,16 +1,14 @@
 import './App.css';
 import axios from 'axios'
 
-function handleClick(e) {
-  e.preventDefault()
-  axios.get('http:/listen').then(res => {
-    console.log(res.data)
-  })
-}
+
+import ListenUi from './component/listeningUi'
 
 function App() {
   return (
-    <input type='submit' onClick={handleClick}></input>
+    <div>
+      <ListenUi />
+    </div>
   );
 }
 
