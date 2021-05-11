@@ -93,6 +93,19 @@ def handleSelect():
             return options
         optionNo += 1
 
+
+def listenType():
+    possibleType = ['date', 'email', 'file', 'password',
+                    'radio', 'checkbox', 'search', 'submit', 'image', 'nubmer']
+    while True:
+        print('Jony: speak type:')
+        value = listener()
+
+        if value in possibleType:
+            return value
+        else:
+            print('No such type!')
+
  # this function looks for appropriate match for spekon file
 
 

@@ -5,7 +5,7 @@ from model import NeuralNet
 from tokenizationAndStemming import BagOfWords, tokenize
 from voice import listener
 
-from specialHandlers import handleSrc, handleTable, handleList, handleSelect
+from specialHandlers import handleSrc, handleTable, handleList, handleSelect, listenType
 
 # Tokenize, stem the spoken word and shape them to fit on the model
 
@@ -97,9 +97,11 @@ def listenUser(recType):
         else:
             print(f'you: {sentence}')
             # if command is understandable synthesize the tag
+
             tag = synthesizeTag(sentence, botName, recType)
             print(f'jony: {tag}')
-            return tag
+            if tag != None:
+                return tag
 
 
 def listenTag():
@@ -115,6 +117,8 @@ def listenTag():
         innerElement = handleForm()
     if tag == 'select':
         innerElement = handleSelect()
+    if tag == 'nav':
+        innerElement = handleNav()
 
     return tag, innerElement
 
@@ -127,11 +131,14 @@ def listenAttribute(tag):
     while True:
         listenedAttribute = listenUser(2)
         if listenedAttribute is not None:
+            value = []
             if 'quit' in listenedAttribute:
                 return attribute
             # we have to handle some special attribute like src,values of option
             if listenedAttribute == "src":
                 value = handleSrc()
+            if listenAttribute == "type":
+                value = listenType()
             else:
                 print(f'jony: speak {listenedAttribute} value')
                 value = listener()
@@ -175,13 +182,27 @@ def completeListener():
     return data
 
 
+# Notice here these two special handlers are here because we need to listen to complete tag
+# again and doing it in special handlers create importing problem
+
 def handleForm():
+    tags = []
     while True:
-        tags = []
         tag = completeListener()
         tags.append(tag)
-        print('is there more tag inside form?')
         print('till now ', tags)
+        print('is there more tag inside form?')
+        openion = listener()
+        if 'yes' not in openion:
+            return tags
+
+
+def handleNav():
+    tags = []
+    while True:
+        tag = completeListener()
+        tags.append(tag)
+        print('is there more <a> tags? yes to continue')
         openion = listener()
         if 'yes' not in openion:
             return tags
